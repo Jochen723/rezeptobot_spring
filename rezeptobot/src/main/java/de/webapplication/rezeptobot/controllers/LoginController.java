@@ -45,12 +45,4 @@ public class LoginController {
 
 		return "register_success";
 	}
-
-	@GetMapping("/users")
-	public String listUsers(Model model) {
-		Iterable<User> listUsers = userService.getAll();
-		model.addAttribute("listUsers", listUsers);
-
-		return "users";
-	}
 }
