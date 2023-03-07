@@ -48,4 +48,9 @@ public class LoginController {
 
 		return modelAndView;
 	}
+
+	@PostMapping("/process-login")
+	public ModelAndView goToRecipeOverview() {
+		return new ModelAndView("redirect:/uebersicht");
+	}
 }
