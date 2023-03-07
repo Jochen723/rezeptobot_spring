@@ -17,32 +17,35 @@ public class LoginController {
 	private UserService userService;
 
 	@GetMapping("/login")
-	public String showForm() {
-		return "login";
+	public ModelAndView showLoginForm() {
+		return new ModelAndView("login");
 	}
 
-	@GetMapping("/registrieren")
-	public String showRegisterForm(Model model) {
-		model.addAttribute("user", new User());
-		return "registrieren";
+	@GetMapping("/registration")
+	public ModelAndView showRegisterForm(Model model) {
+        ModelAndView modelAndView = new ModelAndView("registration");
+		modelAndView.addObject("user", new User());
+		return modelAndView;
 	}
 
+	/**
+	 * If User go directly to this Link, he will redirect to login
+	 * @return
+	 */
 	@GetMapping("/process_register")
 	public ModelAndView returnToLogin() {
 		return new ModelAndView("redirect:/login");
 	}
 
 	@PostMapping("/process_register")
-	public String processRegister(User user) {
+	public ModelAndView processRegister(User user) {
+		ModelAndView modelAndView = new ModelAndView("register_success");
 		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		// String encodedPassword = passwordEncoder.encode(user.getPassword());
 		// user.setPassword(encodedPassword);
 
 		userService.save(user);
-		// System.out.println("Encoded password is " + user.getPassword());
 
-		// userRepo.save(user);
-
-		return "register_success";
+		return modelAndView;
 	}
 }
