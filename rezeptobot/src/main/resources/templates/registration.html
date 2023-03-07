@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Rezeptobot - Login</title>
+    <title>Rezeptobot - Registrierung</title>
 
     <link href="/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
@@ -13,10 +13,11 @@
     <link href="/css/select2.min.css" rel="stylesheet" />
     <link href="/css/login.css" rel="stylesheet" />
 
-    <script src="/js/login.js"></script>
+    <script src="js/registrierung.js"></script>
   </head>
+
   <body>
-    <div class="featured">
+    <div class="featured" style="margin-top: -10px">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-12">
@@ -26,51 +27,72 @@
           <div class="col-lg-8">
             <div class="box grid recipes">
               <div class="by" style="text-align: center">
-                <i class="fa" aria-hidden="true"></i> Login
+                <i class="fa" aria-hidden="true"></i> Registrieren
               </div>
               <div class="content">
                 <div class="container">
                   <div class="row">
                     <div class="col-lg-12">
                       <form
-                        id="loginForm"
+                        id="registrationForm"
+                        th:action="@{/process_register}"
+                        th:object="${user}"
                         method="post"
-                        th:action="@{/process-login}"
+                        style="max-width: 600px; margin: 0 auto"
                       >
                         <div class="form-group">
                           <label style="margin-top: 10px">E-Mail</label>
-                          <input id="mail" type="text" class="form-control" />
+                          <input
+                            id="mail"
+                            type="email"
+                            th:field="*{email}"
+                            class="form-control"
+                          />
                         </div>
+                        <p id="emailFailure" style="color: red; display: none">
+                          Benutzername oder Passwort falsch.
+                        </p>
                         <div class="form-group">
                           <label>Passwort</label>
                           <input
                             id="passwort"
                             type="password"
+                            th:field="*{password}"
                             class="form-control"
                           />
                         </div>
+                        <p id="pw1Failure" style="color: red; display: none">
+                          Benutzername oder Passwort falsch.
+                        </p>
+                        <div class="form-group">
+                          <label>Passwort wiederholen</label>
+                          <input
+                            id="passwortWiederholen"
+                            type="password"
+                            class="form-control"
+                          />
+                        </div>
+                        <p id="pw2Failure" style="color: red; display: none">
+                          Benutzername oder Passwort falsch.
+                        </p>
+                        <br />
+                        <br />
 
                         <a
+                          onclick="checkRegistration()"
                           class="btn"
                           style="background-color: #363636; color: #fff"
                           href="#"
-                          onclick="document.getElementById('loginForm').submit()"
-                          >Login</a
+                          >Registrieren</a
                         >
 
                         <a
                           class="btn"
                           style="background-color: #363636; color: #fff"
-                          th:href="@{/registration}"
+                          th:href="@{/login}"
                           sdf
-                          >Registrieren</a
+                          >Abbrechen</a
                         >
-
-                        <br />
-                        <br />
-                        <p id="loginFailed" style="color: red; display: none">
-                          Benutzername oder Passwort falsch.
-                        </p>
                       </form>
                     </div>
                   </div>
