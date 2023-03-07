@@ -1,6 +1,6 @@
 function checkLogin() {
   var validationSuccessful = true,
-        mail = document.getElementById("mail").value;
+    mail = document.getElementById("mail").value;
 
   if (!validateEmail(mail)) {
     validationSuccessful = false;
@@ -16,4 +16,3 @@ function validateEmail(email) {
   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
 }
-});
