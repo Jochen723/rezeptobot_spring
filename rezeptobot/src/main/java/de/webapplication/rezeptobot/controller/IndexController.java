@@ -1,4 +1,4 @@
-package de.webapplication.rezeptobot.controllers;
+package de.webapplication.rezeptobot.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +9,6 @@ public class IndexController {
 
 	@GetMapping("/")
 	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView("login");
-
-		// Iterable<User> users = userService.getAll();
-		// modelAndView.addObject("users", userService.getAll());
-		return modelAndView;
+		return new ModelAndView("login");
 	}
 }
