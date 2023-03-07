@@ -92,6 +92,21 @@
               <i class="fa fa-cutlery" aria-hidden="true"></i> von A bis Z
             </h5>
           </div>
+		  <div class="col-lg-4 col-sm-6" id="recipe1" th:each="recipe: ${recipes}">
+			<div class="box grid recipes">
+				<div class="by">
+					<i class="fa fa-user"></i>
+				</div>
+				<a th:href="@{rezeptdetails/{postId}(postId=${recipe.id})}">
+<img class="info" th:attr="src=@{${pic}}" />						</a>
+				<h2>
+					<a id="recipe_title1" th:href="@{rezeptdetails/{postId}(postId=${recipe.id})}"
+						th:text="${recipe.titel}"></a>
+				</h2>
+			</div>
+
+		</div>
+	</div>
         </div>
       </div>
     </div>
