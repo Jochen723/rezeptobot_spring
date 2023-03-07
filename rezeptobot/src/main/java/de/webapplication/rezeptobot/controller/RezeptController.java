@@ -28,4 +28,14 @@ public class RezeptController {
 
     return modelAndView;
   }
+
+  @GetMapping("/rezeptdetails/{id}")
+  public ModelAndView getRecipeDetails() {
+    ModelAndView modelAndView = new ModelAndView("/rezeptdetails");
+
+    return modelAndView;
+  
+  
+  }  
+
 }
