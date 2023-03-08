@@ -132,7 +132,7 @@
                   <ul id="ingredients" class="ingredients">
                     <li
                       th:each="rezeptzutat : ${recipe.rezeptzutaten}"
-                      th:text="${rezeptzutat.anzahl} + ' ' + ${rezeptzutat.einheit}"
+                      th:text="${rezeptzutat.anzahl} + ' ' + ${rezeptzutat.einheit} + ' ' + ${rezeptzutat.bezeichnung}"
                     ></li>
                   </ul>
                 </div>
