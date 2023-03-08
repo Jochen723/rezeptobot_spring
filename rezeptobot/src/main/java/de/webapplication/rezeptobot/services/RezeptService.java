@@ -1,32 +1,38 @@
 package de.webapplication.rezeptobot.services;
 
+import de.webapplication.rezeptobot.models.Rezept;
+import de.webapplication.rezeptobot.models.Rezeptzutat;
+import de.webapplication.rezeptobot.repositories.RezeptRepository;
+import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import de.webapplication.rezeptobot.models.Rezept;
-import de.webapplication.rezeptobot.repositories.RezeptRepository;
 
 @Service
 public class RezeptService {
 
-	@Autowired
-	private RezeptRepository rezeptRepository;
+  @Autowired
+  private RezeptRepository rezeptRepository;
 
-	public Iterable<Rezept> getAll() {
-		return rezeptRepository.findAll();
-	}
+  public Iterable<Rezept> getAll() {
+    return rezeptRepository.findAll();
+  }
 
-	public Optional<Rezept> getById(Long id) {
-		return rezeptRepository.findById(id);
-	}
+  public Rezept getById(Long id) {
+    Optional<Rezept> rezept = rezeptRepository.findById(id);
 
-	public Rezept save(Rezept rezept) {
-		return rezeptRepository.save(rezept);
-	}
+    return rezept.get();
+  }
 
-	public void delete(Rezept rezept) {
-		rezeptRepository.delete(rezept);
-	}
+  public Rezept save(Rezept rezept) {
+    return rezeptRepository.save(rezept);
+  }
+
+  public void delete(Rezept rezept) {
+    rezeptRepository.delete(rezept);
+  }
+
+  public List<Rezeptzutat> getRezeptzutatenByRezeptId(Long rezept_id) {
+    return rezeptRepository.getRezeptZutatenByRezeptId(rezept_id);
+  }
 }

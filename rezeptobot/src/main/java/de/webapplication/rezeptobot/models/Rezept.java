@@ -1,103 +1,136 @@
 package de.webapplication.rezeptobot.models;
 
-import java.util.Date;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "rezept")
 public class Rezept {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id")
+  private Long id;
 
-	private String titel;
+  private String titel;
 
-	private String durchfuehrung;
+  private String durchfuehrung;
 
-	private int anzahlPersonen;
+  private int anzahlPersonen;
 
-	private int kochzeitInMinuten;
+  private int kochzeitInMinuten;
 
-	private int vorbereitsungszeitInMinuten;
+  private int vorbereitsungszeitInMinuten;
 
-	private Date hinzugefuegt;
-	
-	public Rezept() {
-		
-	}
+  private Date hinzugefuegt;
 
-	public Rezept(String titel, String durchfuehrung, int anzahlPersonen, int kochzeitInMinuten,
-			int vorbereitsungszeitInMinuten, Date hinzugefuegt) {
-		super();
-		this.titel = titel;
-		this.durchfuehrung = durchfuehrung;
-		this.anzahlPersonen = anzahlPersonen;
-		this.kochzeitInMinuten = kochzeitInMinuten;
-		this.vorbereitsungszeitInMinuten = vorbereitsungszeitInMinuten;
-		this.hinzugefuegt = hinzugefuegt;
-	}
+  @OneToMany(
+    fetch = FetchType.EAGER,
+    mappedBy = "rezept",
+    cascade = CascadeType.ALL
+  )
+  private Set<Rezeptzutat> rezeptzutaten = new HashSet<>();
 
-	public Long getId() {
-		return id;
-	}
+  public Rezept() {}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  public Rezept(
+    String titel,
+    String durchfuehrung,
+    int anzahlPersonen,
+    int kochzeitInMinuten,
+    int vorbereitsungszeitInMinuten,
+    Date hinzugefuegt
+  ) {
+    super();
+    this.titel = titel;
+    this.durchfuehrung = durchfuehrung;
+    this.anzahlPersonen = anzahlPersonen;
+    this.kochzeitInMinuten = kochzeitInMinuten;
+    this.vorbereitsungszeitInMinuten = vorbereitsungszeitInMinuten;
+    this.hinzugefuegt = hinzugefuegt;
+  }
 
-	public String getTitel() {
-		return titel;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setTitel(String titel) {
-		this.titel = titel;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public String getDurchfuehrung() {
-		return durchfuehrung;
-	}
+  public String getTitel() {
+    return titel;
+  }
 
-	public void setDurchfuehrung(String durchfuehrung) {
-		this.durchfuehrung = durchfuehrung;
-	}
+  public void setTitel(String titel) {
+    this.titel = titel;
+  }
 
-	public int getAnzahlPersonen() {
-		return anzahlPersonen;
-	}
+  public String getDurchfuehrung() {
+    return durchfuehrung;
+  }
 
-	public void setAnzahlPersonen(int anzahlPersonen) {
-		this.anzahlPersonen = anzahlPersonen;
-	}
+  public void setDurchfuehrung(String durchfuehrung) {
+    this.durchfuehrung = durchfuehrung;
+  }
 
-	public int getKochzeitInMinuten() {
-		return kochzeitInMinuten;
-	}
+  public int getAnzahlPersonen() {
+    return anzahlPersonen;
+  }
 
-	public void setKochzeitInMinuten(int kochzeitInMinuten) {
-		this.kochzeitInMinuten = kochzeitInMinuten;
-	}
+  public void setAnzahlPersonen(int anzahlPersonen) {
+    this.anzahlPersonen = anzahlPersonen;
+  }
 
-	public int getVorbereitsungszeitInMinuten() {
-		return vorbereitsungszeitInMinuten;
-	}
+  public int getKochzeitInMinuten() {
+    return kochzeitInMinuten;
+  }
 
-	public void setVorbereitsungszeitInMinuten(int vorbereitsungszeitInMinuten) {
-		this.vorbereitsungszeitInMinuten = vorbereitsungszeitInMinuten;
-	}
+  public void setKochzeitInMinuten(int kochzeitInMinuten) {
+    this.kochzeitInMinuten = kochzeitInMinuten;
+  }
 
-	public Date getHinzugefuegt() {
-		return hinzugefuegt;
-	}
+  public int getVorbereitsungszeitInMinuten() {
+    return vorbereitsungszeitInMinuten;
+  }
 
-	public void setHinzugefuegt(Date hinzugefuegt) {
-		this.hinzugefuegt = hinzugefuegt;
-	}
+  public void setVorbereitsungszeitInMinuten(int vorbereitsungszeitInMinuten) {
+    this.vorbereitsungszeitInMinuten = vorbereitsungszeitInMinuten;
+  }
+
+  public Date getHinzugefuegt() {
+    return hinzugefuegt;
+  }
+
+  public void setHinzugefuegt(Date hinzugefuegt) {
+    this.hinzugefuegt = hinzugefuegt;
+  }
+
+  public Set<Rezeptzutat> getRezeptzutaten() {
+    return rezeptzutaten;
+  }
+
+  public void setRezeptzutaten(Set<Rezeptzutat> rezeptzutaten) {
+    this.rezeptzutaten = rezeptzutaten;
+  }
+
+  public void addRezeptzutat(Rezeptzutat rezeptzutat) {
+    rezeptzutaten.add(rezeptzutat);
+    rezeptzutat.setRezept(this);
+  }
+
+  public void removeRezeptzutat(Rezeptzutat rezeptzutat) {
+    rezeptzutaten.remove(rezeptzutat);
+    rezeptzutat.setRezept(null);
+  }
 }

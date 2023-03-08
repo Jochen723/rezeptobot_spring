@@ -129,7 +129,12 @@
               <div class="row">
                 <div class="col-lg-6 col-sm-6">
                   <h3>Zutaten</h3>
-                  <ul id="ingredients" class="ingredients"></ul>
+                  <ul id="ingredients" class="ingredients">
+                    <li
+                      th:each="rezeptzutat : ${recipe.rezeptzutaten}"
+                      th:text="${rezeptzutat.anzahl} + ' ' + ${rezeptzutat.einheit}"
+                    ></li>
+                  </ul>
                 </div>
                 <div class="col-lg-6 col-sm-6">
                   <h3>Zubereitung</h3>
