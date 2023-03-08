@@ -92,12 +92,35 @@
               <div class="row">
                 <div id="portionen" class="col-lg-4 col-sm-4">
                   <p>Portionen</p>
+                  <p>
+                    <strong>
+                      <i class="fa fa-users"></i>
+                      <b th:text="${recipe.anzahlPersonen}"></b>
+                    </strong>
+                  </p>
                 </div>
                 <div id="vorbereitungszeit" class="col-lg-4 col-sm-4">
                   <p>Vorbereitungszeit</p>
+                  <p>
+                    <strong>
+                      <i class="fa fa-clock-o"></i>
+                      <b
+                        th:text="${recipe.vorbereitsungszeitInMinuten}+ ' Minuten'"
+                        >Minuten</b
+                      >
+                    </strong>
+                  </p>
                 </div>
                 <div id="kochzeit" class="col-lg-4 col-sm-4">
                   <p>Kochzeit</p>
+                  <p>
+                    <strong>
+                      <i class="fa fa-clock-o"></i>
+                      <b th:text="${recipe.kochzeitInMinuten}+ ' Minuten'"
+                        >Minuten</b
+                      >
+                    </strong>
+                  </p>
                 </div>
               </div>
             </div>
@@ -110,7 +133,11 @@
                 </div>
                 <div class="col-lg-6 col-sm-6">
                   <h3>Zubereitung</h3>
-                  <ol id="zubereitung" class="directions"></ol>
+                  <ol id="zubereitung" class="directions">
+                    <li>
+                      <div id="myDiv" th:text="${recipe.durchfuehrung}"></div>
+                    </li>
+                  </ol>
                 </div>
               </div>
               <div class="row">

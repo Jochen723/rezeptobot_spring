@@ -20,7 +20,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid justify-content-center">
-        <a class="navbar-brand" href="index.php"
+        <a class="navbar-brand" th:href="@{/uebersicht}"
           ><i class="fa fa-cutlery" aria-hidden="true"></i> Rezeptobot</a
         >
         <button
@@ -59,7 +59,7 @@
             </li>
 
             <li class="nav-item btn-submit-recipe">
-              <a class="nav-link" href="neuesrezept.php"
+              <a class="nav-link" th:href="@{/neuesrezept}"
                 ><i class="fa fa-upload" aria-hidden="true"></i> neues Rezept</a
               >
             </li>

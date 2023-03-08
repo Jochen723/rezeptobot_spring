@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import de.webapplication.rezeptobot.models.Rezept;
@@ -43,7 +44,26 @@ public class RezeptController {
     modelAndView.addObject("recipe", rezept.get());
 
     return modelAndView;
+  }
+
+  @GetMapping("/neuesrezept")
+  public ModelAndView newRecipe() {
+    ModelAndView modelAndView = new ModelAndView("neuesrezept");
+    modelAndView.addObject("rezept", new Rezept());
+
+    return modelAndView;
 
   }
 
+  @PostMapping("/process_neues_rezept")
+	public ModelAndView processRegister(Rezept rezept) {
+		ModelAndView modelAndView = new ModelAndView("uebersicht");
+		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		// String encodedPassword = passwordEncoder.encode(user.getPassword());
+		// user.setPassword(encodedPassword);
+
+		rezeptService.save(rezept);
+
+		return modelAndView;
+	}
 }
