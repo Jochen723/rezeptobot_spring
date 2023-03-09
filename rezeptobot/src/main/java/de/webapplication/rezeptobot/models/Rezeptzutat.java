@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -23,15 +24,26 @@ public class Rezeptzutat {
   @Column(name = "einheit")
   private String einheit;
 
-  public Rezeptzutat(Long id, Double anzahl, String einheit, Rezept rezept) {
+  @Column(name = "bezeichnung")
+  private String bezeichnung;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn
+  private Rezept rezept;
+
+  public Rezeptzutat(
+    Long id,
+    Double anzahl,
+    String einheit,
+    String bezeichnung,
+    Rezept rezept
+  ) {
     this.id = id;
     this.anzahl = anzahl;
     this.einheit = einheit;
+    this.bezeichnung = bezeichnung;
     this.rezept = rezept;
   }
-
-  @ManyToOne(fetch = FetchType.EAGER)
-  private Rezept rezept;
 
   @Override
   public boolean equals(Object o) {
@@ -61,6 +73,14 @@ public class Rezeptzutat {
 
   public void setEinheit(String einheit) {
     this.einheit = einheit;
+  }
+
+  public String getBezeichnung() {
+    return bezeichnung;
+  }
+
+  public void setBezeichnung(String bezeichnung) {
+    this.bezeichnung = bezeichnung;
   }
 
   public Rezept getRezept() {

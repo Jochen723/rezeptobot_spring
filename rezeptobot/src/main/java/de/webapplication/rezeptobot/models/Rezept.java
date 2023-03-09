@@ -7,11 +7,14 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "rezept")
@@ -24,6 +27,7 @@ public class Rezept {
 
   private String titel;
 
+  @Column(length = 1000000)
   private String durchfuehrung;
 
   private int anzahlPersonen;
@@ -34,12 +38,12 @@ public class Rezept {
 
   private Date hinzugefuegt;
 
-  @OneToMany(
-    fetch = FetchType.EAGER,
-    mappedBy = "rezept",
-    cascade = CascadeType.ALL
-  )
-  private Set<Rezeptzutat> rezeptzutaten = new HashSet<>();
+  @Lob
+  @Column(columnDefinition = "MEDIUMBLOB")
+  private String bild;
+
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  private List<Rezeptzutat> rezeptzutaten = new ArrayList<>();
 
   public Rezept() {}
 
@@ -49,6 +53,7 @@ public class Rezept {
     int anzahlPersonen,
     int kochzeitInMinuten,
     int vorbereitsungszeitInMinuten,
+    String bild,
     Date hinzugefuegt
   ) {
     super();
@@ -57,6 +62,7 @@ public class Rezept {
     this.anzahlPersonen = anzahlPersonen;
     this.kochzeitInMinuten = kochzeitInMinuten;
     this.vorbereitsungszeitInMinuten = vorbereitsungszeitInMinuten;
+    this.bild = bild;
     this.hinzugefuegt = hinzugefuegt;
   }
 
@@ -116,11 +122,20 @@ public class Rezept {
     this.hinzugefuegt = hinzugefuegt;
   }
 
-  public Set<Rezeptzutat> getRezeptzutaten() {
+  public String getBild() {
+    byte[] decoded = Base64.getDecoder().decode(bild);
+    return new String(decoded, StandardCharsets.UTF_8);
+  }
+
+  public void setBild(String bild) {
+    this.bild = bild;
+  }
+
+  public List<Rezeptzutat> getRezeptzutaten() {
     return rezeptzutaten;
   }
 
-  public void setRezeptzutaten(Set<Rezeptzutat> rezeptzutaten) {
+  public void setRezeptzutaten(List<Rezeptzutat> rezeptzutaten) {
     this.rezeptzutaten = rezeptzutaten;
   }
 
