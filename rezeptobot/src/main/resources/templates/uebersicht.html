@@ -102,7 +102,10 @@
                 <i class="fa fa-user"></i>
               </div>
               <a th:href="@{rezeptdetails/{postId}(postId=${recipe.id})}">
-                <img class="info" th:attr="src=@{${pic}}" />
+                <img
+                  class="info"
+                  th:src="*{'data:image/jpeg;base64,'+{recipe.bild}}"
+                />
               </a>
               <h2>
                 <a

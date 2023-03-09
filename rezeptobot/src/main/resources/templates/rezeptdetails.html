@@ -87,7 +87,11 @@
             </div>
           </div>
           <div class="col-lg-8">
-            <img id="recipe_image" src="#" alt="" />
+            <img
+              id="recipe_image"
+              th:src="*{'data:image/jpeg;base64,'+{recipe.bild}}"
+              alt=""
+            />
             <div class="info">
               <div class="row">
                 <div id="portionen" class="col-lg-4 col-sm-4">
