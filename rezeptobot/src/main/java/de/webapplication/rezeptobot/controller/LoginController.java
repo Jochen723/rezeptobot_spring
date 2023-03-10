@@ -51,6 +51,6 @@ public class LoginController {
 
 	@PostMapping("/process-login")
 	public ModelAndView goToRecipeOverview() {
-		return new ModelAndView("redirect:/uebersicht");
+		return new ModelAndView("redirect:/rezepte");
 	}
 }
