@@ -58,7 +58,8 @@ public class RezeptService {
     try {
         byte[] imageBytes = Base64.getEncoder().encode(file.getBytes());
         recipe.setBild(Base64.getEncoder().encodeToString(imageBytes));
-        save(recipe);
+        Rezept tmpRecipe = save(recipe);
+        recipe.setId(tmpRecipe.getId());
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

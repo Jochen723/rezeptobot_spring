@@ -27,7 +27,7 @@ public class RezeptController {
    */
   @GetMapping("/rezepte")
   public ModelAndView getAllRecipes() {
-    ModelAndView modelAndView = new ModelAndView("/uebersicht");
+    ModelAndView modelAndView = new ModelAndView("/rezepte");
 
     List<Rezept> liste = rezeptService.getAllRecipes();
     modelAndView.addObject("recipes", liste);
@@ -79,9 +79,8 @@ public class RezeptController {
   public ModelAndView processRegister(
       Rezept rezept,
       @RequestParam("image") MultipartFile multipartFile) {
-    ModelAndView modelAndView = new ModelAndView("redirect:/rezepte");
-
     rezeptService.saveRecipeWithImage(multipartFile, rezept);
+    ModelAndView modelAndView = new ModelAndView("redirect:/rezeptdetails/" + rezept.getId());
 
     return modelAndView;
   }
