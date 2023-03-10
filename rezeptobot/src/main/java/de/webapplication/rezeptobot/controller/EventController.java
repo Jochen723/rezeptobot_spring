@@ -1,14 +1,8 @@
 package de.webapplication.rezeptobot.controller;
 
-import de.webapplication.rezeptobot.models.Event;
 import de.webapplication.rezeptobot.services.EventService;
-import de.webapplication.rezeptobot.services.RezeptService;
-
-import java.util.List;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,22 +47,14 @@ public class EventController {
   )
   @ResponseBody
   public ResponseEntity<String> getPlanificado() {
-    List<Event> events = eventService.getAllEvents();
     HttpHeaders headers = new HttpHeaders();
     headers.add("Content-Type", "application/json; charset=utf-8");
 
-    JSONArray array = new JSONArray();
+    JSONArray eventJsonArray = eventService.getAllEventsAsJsonArray();
 
-    for (Event event : events) {
-      JSONObject resp = new JSONObject();
-
-      resp.put("id", event.getId());
-      resp.put("title", event.getTitel());
-      resp.put("start", event.getKochdatum());
-      resp.put("hintergrundfarbe", event.getHintergrundfarbe());
-      array.put(resp);
-    }
-
-    return new ResponseEntity<String>(array.toString(), HttpStatus.CREATED);
+    return new ResponseEntity<String>(
+      eventJsonArray.toString(),
+      HttpStatus.CREATED
+    );
   }
 }
