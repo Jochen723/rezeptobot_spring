@@ -199,7 +199,9 @@
                   <input
                     id="anzahlPortionen"
                     type="text"
+                    th:field="*{anzahlPersonen}"
                     class="form-control"
+                    required="required"
                   />
                 </div>
               </div>
@@ -209,7 +211,9 @@
                   <input
                     id="vorbereitungszeit"
                     type="text"
+                    th:field="*{vorbereitsungszeitInMinuten}"
                     class="form-control"
+                    required="required"
                   />
                 </div>
               </div>
@@ -221,6 +225,7 @@
                     type="text"
                     th:field="*{kochzeitInMinuten}"
                     class="form-control"
+                    required="required"
                   />
                 </div>
               </div>
