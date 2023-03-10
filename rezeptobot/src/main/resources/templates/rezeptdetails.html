@@ -51,7 +51,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="rezeptplaner.php">Kalender</a>
+              <a class="nav-link" th:href="@{/rezeptplaner}">Kalender</a>
             </li>
 
             <li class="nav-item">
@@ -154,23 +154,23 @@
               <div class="row">
                 <div class="col-lg-12 col-sm-12">
                   <a
-                    id="rezeptaendern"
-                    onclick="ermittleLinkZuRezeptAendern();"
+                    id="recipe_edit"
+                    th:href="@{/rezeptdetails/{id}/editieren(id=${recipe.id})}"
                     class="btn"
                     style="background-color: #363636; color: #fff"
                   >
                     Rezept ändern
                   </a>
                   <a
-                    id="rezeptaendern"
-                    href="rezeptaendern.php"
+                    id="recipe_remove"
+                    th:href="@{/rezeptdetails/{id}/entfernen(id=${recipe.id})}"
                     class="btn"
-                    data-toggle="modal"
-                    data-target="#wunderlistmodal"
                     style="background-color: #363636; color: #fff"
                   >
-                    Wunderlist
+                    Rezept löschen
                   </a>
+                  <!--
+                  
                   <a
                     id="rezeptaendern"
                     href="rezeptaendern.php"
@@ -199,6 +199,7 @@
                   >
                     Rezept löschen
                   </a>
+                  -->
                 </div>
               </div>
             </div>
