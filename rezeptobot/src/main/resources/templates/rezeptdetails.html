@@ -144,7 +144,9 @@
                   <h3>Zubereitung</h3>
                   <ol id="zubereitung" class="directions">
                     <li>
-                      <div id="myDiv" th:text="${recipe.durchfuehrung}"></div>
+                      <div id="myDiv">
+                        <span style="white-space: pre-line" th:text="${recipe.durchfuehrung}"></span>
+                      </div>
                     </li>
                   </ol>
                 </div>
