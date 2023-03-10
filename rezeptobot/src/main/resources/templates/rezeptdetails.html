@@ -169,6 +169,15 @@
                   >
                     Rezept löschen
                   </a>
+                  <a
+                    id="recipe_cooked_today"
+                    th:href="@{/heuteGekocht/{id}(id=${recipe.id})}"
+                    class="btn"
+                    style="background-color: #363636; color: #fff"
+                  >
+                    Heute gekocht
+                  </a>
+
                   <!--
                   
                   <a
