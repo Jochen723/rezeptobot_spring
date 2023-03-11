@@ -24,6 +24,29 @@ public class EventService {
     return eventRepository.findAll();
   }
 
+  public Event saveEvent(Event event) {
+
+    switch (event.getTitel()) {
+      case "ess":
+        event.setTitel("Essensbestellung");
+        event.setHintergrundfarbe(EventHintergrundEnum.ESSENSBESTELLUNG.getHintergrundfarbe());
+        break;
+        case "aus":
+        event.setTitel("Auswärts");
+        event.setHintergrundfarbe(EventHintergrundEnum.AUSWAERTS.getHintergrundfarbe());
+        break;
+        case "son":
+        event.setTitel("Alternativ: " + event.getBeschreibungSonstigesGericht());
+        event.setHintergrundfarbe(EventHintergrundEnum.AUSWAERTS.getHintergrundfarbe());
+        break;
+      default:
+        event.setHintergrundfarbe(EventHintergrundEnum.ALTERNATIVES_REZEPT.getHintergrundfarbe());
+        break;
+    }
+    
+    return eventRepository.save(event);
+  }
+
   public JSONArray getAllEventsAsJsonArray() {
     JSONArray eventJsonArray = new JSONArray();
 
@@ -45,7 +68,7 @@ public class EventService {
     Event event = new Event();
     event.setKochdatum(new Date());
     event.setTitel(rezept.getTitel());
-    event.setHintergrundfarbe(EventHintergrundEnum.INTERNES_REZEPT.toString());
+    event.setHintergrundfarbe(EventHintergrundEnum.INTERNES_REZEPT.getHintergrundfarbe());
     eventRepository.save(event);
   }
 }

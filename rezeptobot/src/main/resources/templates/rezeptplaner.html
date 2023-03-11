@@ -118,7 +118,12 @@
                         <h2>Event hinzufügen</h2>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form
+                            id="newEventForm"
+                            method="post"
+                            th:object="${event}"
+                            th:action="@{/process-new_event}"
+                        >
                             <div class="form-group">
                                 <label>Datum:</label>
                                 <input
@@ -126,12 +131,18 @@
                                     id="date"
                                     name="date"
                                     placeholder="DD.MM.YYYY"
-                                    type="text"
+                                    type="date"
+                                    th:field="*{kochdatum}"
                                 />
                             </div>
                             <div class="form-group">
                                 <label for="selectArt">Art des Essens:</label>
-                                <select class="form-control" id="selectArt">
+                                <select
+                                    class="form-control"
+                                    id="selectArt"
+                                    ,
+                                    th:field="*{titel}"
+                                >
                                     <option value="ess" id="ess">
                                         Essensbestellung
                                     </option>
@@ -143,14 +154,17 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-group" id="beschreibungDiv"></div>
-                            <button
-                                type="button"
-                                id="target"
-                                class="btn btn-primary"
-                            >
-                                Speichere Event
-                            </button>
+                            <div class="form-group" id="test1" hidden>
+                                <label id="labelGericht">Titel des Rezepts</label>
+                                <input
+                                    class="form-control"
+                                    id="inputTitelSonstigesGericht"
+                                    type="text"
+                                    th:field="*{beschreibungSonstigesGericht}"
+                                />
+
+                            </div>
+                            <input type="submit" value="Submit" />
                         </form>
                     </div>
                     <div class="modal-footer">

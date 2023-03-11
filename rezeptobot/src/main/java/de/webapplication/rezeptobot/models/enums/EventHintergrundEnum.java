@@ -12,5 +12,8 @@ public enum EventHintergrundEnum {
     private EventHintergrundEnum(String hintergrundfarbe) {
         this.hintergrundfarbe = hintergrundfarbe;
     }
-    
+
+    public String getHintergrundfarbe() {
+        return hintergrundfarbe;
+    }
 }

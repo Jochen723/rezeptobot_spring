@@ -1,5 +1,6 @@
 package de.webapplication.rezeptobot.controller;
 
+import de.webapplication.rezeptobot.models.Event;
 import de.webapplication.rezeptobot.services.EventService;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +25,18 @@ public class EventController {
 
   @GetMapping("/rezeptplaner")
   public ModelAndView getRezeptkalender() {
-    return new ModelAndView("/rezeptplaner");
+    ModelAndView modelAndView = new ModelAndView("/rezeptplaner");
+    modelAndView.addObject("event", new Event());
+
+    return modelAndView;
+  }
+
+  @PostMapping("/process-new_event")
+  public ModelAndView processNewEvent(Event event) {
+    eventService.saveEvent(event);
+    ModelAndView modelAndView = new ModelAndView("redirect:/rezeptplaner");
+
+    return modelAndView;
   }
 
   @GetMapping("/getAllEvents")
