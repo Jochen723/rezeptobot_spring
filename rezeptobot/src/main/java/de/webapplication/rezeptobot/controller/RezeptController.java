@@ -84,4 +84,14 @@ public class RezeptController {
 
     return modelAndView;
   }
+
+  @GetMapping("/rezeptdetails/editieren/{id}")
+  public ModelAndView changeRecipe(@PathVariable("id") Long id) {
+    ModelAndView modelAndView = new ModelAndView("editieren");
+    Rezept rezept = rezeptService.getRecipeById(id);
+    modelAndView.addObject("rezept", rezept);
+
+    return modelAndView;
+
+  }
 }
